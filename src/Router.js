@@ -15,7 +15,7 @@ function Router() {
     <Route path="/add-user" element={<AddMember />}/>
     <Route path="/" element={<Book/>}/>
     <Route path="/user" element={<Member />}/>
-    <Route path="/user/edit" element={<EditMember/>}/>
+    <Route path="/user/edit/:userid" element={<EditMember/>}/>
 
   
   </Routes>
