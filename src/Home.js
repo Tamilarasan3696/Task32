@@ -6,6 +6,7 @@ import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
 
 
+
 export default function DenseAppBar() {
   const navigate= useNavigate();
   return (
@@ -14,8 +15,9 @@ export default function DenseAppBar() {
         <Toolbar variant="dense">
         <Button variant="contained" onClick={()=>navigate("/")}>Total Book</Button>
         <Button variant="contained"onClick={()=>navigate("/add-book")}>Add Book</Button>
-        <Button variant="contained" onClick={()=>navigate("/add-user")}>Add User</Button> <br/>
-        <h1> Library mangement</h1>
+        <Button variant="contained" onClick={()=>navigate("/add-user")}>Add User</Button> 
+        <Button variant="contained" onClick={()=>navigate("/user")}>User</Button> <br/>
+        <h1 style={{marginLeft: '35%'}}> Library mangement</h1>
          
         </Toolbar>
       </AppBar>
