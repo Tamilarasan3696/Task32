@@ -10,19 +10,18 @@ export default function EditMember() {
     const { userid } = useParams();
     const [user, setUser] = useState(null);
     useEffect(() => {
-        axios.get(`https://63da371319fffcd620c36c33.mockapi.io/teachers/${userid}`)
+        axios.get(`
+        https://6437ab94894c9029e8c2db12.mockapi.io/users/${userid}`)
             .then((us) => { setUser(us.data) })
     });
     return user ? <EditUserForm user={user} setUser={setUser}/> : "Please wait........!!!"
 }
 
 function EditUserForm({ user,setUser }) {
-    const [avatar, setAvatar] = useState(user.avatar);
-    const [Name, setName] = useState(user.Name);
-    const [Age, setAge] = useState(user.Age);
-    const [Email, setEmail] = useState(user.Email);
-    const [Address, setAddress] = useState(user.Address);
-    const [ContactNumber, setNumber] = useState(user.ContactNumber);
+    const [poster, setPoster] = useState(user.poster);
+    const [name, setName] = useState(user.name);
+    const [email, setEmail] = useState(user.email);
+    const [contact, setContact] = useState(user.contact);
 
     const navigate = useNavigate();
 
@@ -32,10 +31,10 @@ function EditUserForm({ user,setUser }) {
             <TextField
                 label="image"
                 variant="outlined"
-                onChange={(event) => setAvatar(event.target.value)}
+                onChange={(event) => setPoster(event.target.value)}
                 type="text"
                 placeholder="Enter image url"
-                value={avatar}
+                value={poster}
                 style={{ width: '800px' }}
             /><br /><br />
             <TextField
@@ -44,43 +43,27 @@ function EditUserForm({ user,setUser }) {
                 onChange={(event) => setName(event.target.value)}
                 type="text"
                 placeholder="Enter your name"
-                value={Name}
+                value={name}
                 style={{ width: '800px' }}
             /><br /><br />
-            <TextField
-                label="Age"
-                variant="outlined"
-                onChange={(event) => setAge(event.target.value)}
-                type="text"
-                placeholder="Enter your Age"
-                value={Age}
-                style={{ width: '800px' }}
-            /><br /><br />
+           
             <TextField
                 label="Email"
                 variant="outlined"
                 onChange={(event) => setEmail(event.target.value)}
                 type="text"
                 placeholder="Enter valid email"
-                value={Email}
+                value={email}
                 style={{ width: '800px' }}
             /><br /><br />
-            <TextField
-                label="Address"
-                variant="outlined"
-                onChange={(event) => setAddress(event.target.value)}
-                type="text"
-                placeholder="Enter your Address"
-                value={Address}
-                style={{ width: '800px' }}
-            /><br /><br />
+           
             <TextField
                 label="Contact number"
                 variant="outlined"
-                onChange={(event) => setNumber(event.target.value)}
+                onChange={(event) => setContact(event.target.value)}
                 type="text"
                 placeholder="Enter your Contact Number"
-                value={ContactNumber}
+                value={contact}
                 style={{ width: '800px' }}
             /><br /><br />
             <Button
@@ -89,25 +72,24 @@ function EditUserForm({ user,setUser }) {
                 onClick={
                     () => {
                         const updatedUser = {
-                            avatar: avatar,
-                            Name: Name,
-                            Age: Age,
-                            Email: Email,
-                            Address: Address,
-                            ContactNumber: ContactNumber,
+                            poster: poster,
+                            name: name,
+                            email: email,
+                            contact: contact,
                         };
-                        axios.put(`https://63da371319fffcd620c36c33.mockapi.io/teachers/${user.id}`, (updatedUser))
-                            .then((res) => {
-                                console.log(res.data)
-                                setUser(res.data)
-                                navigate('/members')
-                            });
                         
+                        fetch(` https://6437ab94894c9029e8c2db12.mockapi.io/users/${user.id}`, {
+                            method: "PUT",
+                            body: JSON.stringify(updatedUser),
+                            headers: { "Content-Type": "application/json" },
+                        })
+                            .then((data)=>data.json())
+                            .then(()=>navigate("/user"));
                         }
-                    }
+                }
             >
             SAVE USER
-        </Button> &nbsp;&nbsp;&nbsp;
+        </Button>
 
     <Button color="success"
         variant="contained"
