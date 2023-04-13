@@ -2,7 +2,9 @@ import React from 'react';
 import {  Route,Routes} from 'react-router-dom';
 import AddBook from './AddBook.js';
 import AddMember from './AddMember.js'
-import BookUI from './BookUI.js';
+import BookUI from './Book.js';
+import Member from './Member.js';
+import EditMember from './EditMember.js';
 
 function Router() {
   return (
@@ -12,6 +14,9 @@ function Router() {
     <Route path="/add-book" element={< AddBook/>}/>
     <Route path="/add-user" element={<AddMember />}/>
     <Route path="/" element={<BookUI />}/>
+    <Route path="/user" element={<Member />}/>
+    <Route path="/user/edit" element={<EditMember/>}/>
+
   
   </Routes>
   
